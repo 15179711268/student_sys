@@ -17,6 +17,9 @@ class Category(models.Model):                   #分类
     owner = models.ForeignKey(User,verbose_name='作者',on_delete=models.DO_NOTHING)
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = verbose_name_plural = '分类'
 
@@ -34,6 +37,9 @@ class Tag(models.Model):
         choices=STATUS_ITEMS, verbose_name='状态')
     owner = models.ForeignKey(User,verbose_name='作者',on_delete=models.DO_NOTHING)
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = verbose_name_plural = '标签'
@@ -56,8 +62,12 @@ class Post(models.Model):
         choices=STATUS_ITEMS, verbose_name='状态')
     category = models.ForeignKey(Category, verbose_name='分类',on_delete=models.DO_NOTHING)
     tag = models.ManyToManyField(Tag, verbose_name='标签')
-    ower = models.ForeignKey(User, verbose_name='作者',on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User, verbose_name='作者',on_delete=models.DO_NOTHING)
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+
+    def __str__(self):
+        return self.title
+
 
     class Meta:
         verbose_name = verbose_name_plural = '文章'
